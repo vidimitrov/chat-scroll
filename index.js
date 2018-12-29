@@ -1,6 +1,6 @@
-var scroll = require('./scroll-to');
+var scrollTo = require('./scroll-to');
 
-function calculateScrollOffset(elem, additionalOffset, alignment) {
+function calculateScrollPosition(elem, additionalOffset, alignment) {
   var body = document.body,
       html = document.documentElement;
 
@@ -25,8 +25,12 @@ function calculateScrollOffset(elem, additionalOffset, alignment) {
                   maxScrollPosition);
 }
 
-module.exports = function (elem, options) {
+module.exports = function (elem, container, options) {
   options = options || {};
   if (typeof elem === 'string') elem = document.querySelector(elem);
-  if (elem) return scroll(0, calculateScrollOffset(elem, options.offset, options.align), options);
+  if (elem) {
+    var y = calculateScrollPosition(elem, options.offset, options.align);
+    return scrollTo(y, container, options);
+  }
+  throw(new Error('elem property is required'))
 };

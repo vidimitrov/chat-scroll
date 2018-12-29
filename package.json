@@ -1,13 +1,13 @@
 {
-  "name": "scroll-to-element",
-  "description": "Smooth scrolling to an element via selector or node reference",
-  "version": "2.0.2",
+  "name": "chat-scroll",
+  "description": "Smooth scrolling to an element via selector or node reference in any container",
+  "version": "1.0.0",
   "author": {
-    "name": "Will Hoag",
-    "email": "dev@willhoag.com"
+    "name": "Veselin Dimitrov",
+    "email": "vidimi7rov@gmail.com"
   },
   "bugs": {
-    "url": "https://github.com/willhoag/scroll-to-element/issues"
+    "url": "https://github.com/vidimitrov/chat-scroll/issues"
   },
   "scripts": {
     "build": "browserify -e index.js -o build/scrollToElement.js -s scrollToElement",
@@ -26,7 +26,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/willhoag/scroll-to-element.git"
+    "url": "https://github.com/vidimitrov/chat-scroll.git"
   },
   "devDependencies": {
     "browserify": "^16.2.2"

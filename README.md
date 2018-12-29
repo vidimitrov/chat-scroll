@@ -1,8 +1,8 @@
-# scroll-to-element
+# chatscroll
 
 Smooth scrolls to element of the specified selector or element reference with optional offset, scroll-positon, easing, and duration. Takes into account document height for elements low on the page.
 
-[![NPM](https://nodei.co/npm/scroll-to-element.png)](https://nodei.co/npm/scroll-to-element/)
+[![NPM](https://nodei.co/npm/chat-scroll.png)](https://nodei.co/npm/chat-scroll/)
 
 ## `scrollToElement(selector, <options>)`
 ##### Valid options:

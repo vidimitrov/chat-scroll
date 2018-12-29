@@ -1,36 +1,53 @@
 var scrollTo = require('./scroll-to');
 
-function calculateScrollPosition(elem, additionalOffset, alignment) {
-  var body = document.body,
-      html = document.documentElement;
-
+function calculateScrollPosition(elem, container, options) {
   var elemRect = elem.getBoundingClientRect();
-  var clientHeight = html.clientHeight;
-  var documentHeight = Math.max( body.scrollHeight, body.offsetHeight,
-                                 html.clientHeight, html.scrollHeight, html.offsetHeight );
+  var offsetHeight;
+  var scrollHeight;
+  var currentScroll;
 
-  additionalOffset = additionalOffset || 0;
+  if (container) {
+    offsetHeight = container.offsetHeight;
+    scrollHeight = container.scrollHeight;
+    currentScroll = container.scrollTop;
+  } else {
+    var body = document.body;
+    var html = document.documentElement;
 
-  var scrollPosition;
-  if (alignment === 'bottom') {
-    scrollPosition = elemRect.bottom - clientHeight;
-  } else if (alignment === 'middle') {
-    scrollPosition = elemRect.bottom - clientHeight / 2 - elemRect.height / 2;
-  } else { // top and default
-    scrollPosition = elemRect.top;
+    offsetHeight = html.clientHeight;
+    scrollHeight = Math.max(body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight);
+    currentScroll = Math.max(body.scrollTop, html.scrollTop);
   }
 
-  var maxScrollPosition = documentHeight - clientHeight;
-  return Math.min(scrollPosition + additionalOffset + window.pageYOffset,
-                  maxScrollPosition);
+  additionalOffset = options.offset || 0;
+
+  var scrollPosition = elemRect.top;
+  if (options.align === 'bottom') {
+    scrollPosition = elemRect.bottom - offsetHeight;
+  } else if (options.align === 'middle') {
+    scrollPosition = elemRect.bottom - offsetHeight / 2 - elemRect.height / 2;
+  }
+
+  var maxScrollPosition = scrollHeight;
+  var position = Math.min(scrollPosition + additionalOffset + window.pageYOffset,
+    maxScrollPosition);
+
+  return currentScroll + position;
 }
 
 module.exports = function (elem, container, options) {
   options = options || {};
-  if (typeof elem === 'string') elem = document.querySelector(elem);
+  container = container || null;
+
+  if (typeof elem === 'string') {
+    elem = document.querySelector(elem);
+  }
+
   if (elem) {
-    var y = calculateScrollPosition(elem, options.offset, options.align);
+    var y = calculateScrollPosition(elem, container, options);
     return scrollTo(y, container, options);
   }
+
   throw(new Error('elem property is required'))
 };

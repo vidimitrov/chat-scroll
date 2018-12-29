@@ -1,4 +1,4 @@
-# chatscroll
+# chat-scroll
 
 Smooth scrolls to element of the specified selector or element reference with optional offset, scroll-positon, easing, and duration. Takes into account document height for elements low on the page.
 

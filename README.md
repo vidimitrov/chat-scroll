@@ -4,7 +4,7 @@ Smooth scrolls to element of the specified selector or element reference with op
 
 [![NPM](https://nodei.co/npm/chat-scroll.png)](https://nodei.co/npm/chat-scroll/)
 
-## `scrollToElement(selector, <options>)`
+## `scrollToElement(selector, container, <options>)`
 ##### Valid options:
 
 ###### offset : *number*
@@ -42,6 +42,15 @@ scrollToElement('.className', {
 // or if you already have a reference to the element
 var elem = document.querySelector('.className');
 scrollToElement(elem, {
+	offset: 0,
+	ease: 'out-bounce',
+	duration: 1500
+});
+
+// if you want to specify custom container
+var elem = document.querySelector('.className');
+var container = document.querySelector('#container');
+scrollToElement(elem, container, {
 	offset: 0,
 	ease: 'out-bounce',
 	duration: 1500

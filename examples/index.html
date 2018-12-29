@@ -7,15 +7,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="../build/scrollToElement.js"></script>
 </head>
+<style>
+  body {
+    margin: 0;
+  }
+  #container {
+    background: #3399ff;
+    height: 500px;
+    box-sizing: border-box;
+    overflow: scroll;
+  }
+  .content {
+    height: 1500px;
+  }
+  #scroll-to-element {
+    color: white;
+    font-weight: bold;
+  }
+</style>
 <body>
   <button id="scroll-button" style="position: absolute;">Click to Scroll</button>
-  <div style="padding-top: 1000px;"></div>
-  <div id="scroll-to-element" >Scroll To Here</div>
+  <div id="container">
+    <div class="content"></div>
+    <div id="scroll-to-element">Scroll To Here</div>
+  </div>
 </body>
 <script>
+  const container = document.querySelector('#container')
   const button = document.querySelector('#scroll-button')
   button.addEventListener('click', e => {
-    scrollToElement('#scroll-to-element')
+    scrollToElement('#scroll-to-element', container, {
+      align: 'middle',
+      ease: 'out-circ',
+      duration: 200,
+    });
   })
 </script>
 </html>
